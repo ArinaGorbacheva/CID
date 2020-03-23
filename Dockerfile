@@ -1,0 +1,12 @@
+FROM python:3-onbuild
+EXPOSE 5000
+ARG dir 
+
+COPY . dir/docker-lab0-ArinaGorbacheva/
+WORKDIR dir/docker-lab0-ArinaGorbacheva/ 
+RUN python3 -m venv venv
+RUN . venv/bin/activate
+RUN pip install -e .
+RUN pip install '.[test]' 
+RUN coverage run -m pytest
+ENTRYPOINT coverage report
