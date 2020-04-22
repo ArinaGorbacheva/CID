@@ -55,8 +55,8 @@ jobs:
             docker build -t $PROJECT_NAME:ver_$GITHUB_RUN_NUMBER .
             docker images
             
-     - name: Upload to docker hub 
-       run: |
-            docker login --username=${{ secrets.DOCKER_LOGIN }} --password=${{ secrets.DOCKER_PASSWORD }}
-            docker push $PROJECT_NAME:ver_$GITHUB_RUN_NUMBER
+     #- name: Upload to docker hub 
+     #  run: |
+     #       docker login --username=${{ secrets.DOCKER_LOGIN }} --password=${{ secrets.DOCKER_PASSWORD }}
+     #       docker push $PROJECT_NAME:ver_$GITHUB_RUN_NUMBER
        
