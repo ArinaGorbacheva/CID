@@ -1,3 +1,5 @@
+![CI](https://github.com/HSE-NN-SE/docker-lab0-ArinaGorbacheva/workflows/CI/badge.svg?branch=master)
+
 JavaScript Ajax Example
 =======================
 
