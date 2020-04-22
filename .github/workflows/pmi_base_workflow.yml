@@ -45,5 +45,12 @@ jobs:
    needs: [print_sys_info]
    
    steps:
+     - uses: actions/checkout@v2
+       
      - name: Docker version
        run: docker -v
+
+     - name: Docker build
+       run: |
+            docker build -t ArinaGorbacheva/$PROJECT_NAME:ver_$GITHUB_RUN_NUMBER .
+            docker images
