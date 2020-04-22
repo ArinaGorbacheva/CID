@@ -3,7 +3,7 @@
 name: CI
 
 env:
-  PROJECT_NAME: web_calculator
+  PROJECT_NAME: "arinagorbacheva/web_calculator"
   
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -52,5 +52,5 @@ jobs:
 
      - name: Docker build
        run: |
-            docker build -t arinagorbacheva/$PROJECT_NAME:ver_$GITHUB_RUN_NUMBER .
+            docker build -t $PROJECT_NAME:ver_$GITHUB_RUN_NUMBER .
             docker images
