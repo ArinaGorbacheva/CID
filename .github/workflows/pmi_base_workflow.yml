@@ -26,10 +26,20 @@ jobs:
     - uses: actions/checkout@v2
     - name: Python Style Checker 
       uses: andymckay/pycodestyle-action@0.1.3
+    
+  Test:
+    runs-on: ubuntu-latest
+    needs: [codeStyle]
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Test
+        run: sudo docker build -t $PROJECT_NAME:_Test -f Dockerfile_for_tests . --build-arg .
+      - run: IS_OK=1
 
   CI:
    runs-on: [ubuntu-latest]
- #  needs: [codeStyle]
+   needs: [Test] 
    
    steps:
      - uses: actions/checkout@v2
@@ -46,4 +56,3 @@ jobs:
        run: |
             docker login --username=${{ secrets.DOCKER_LOGIN }} --password=${{ secrets.DOCKER_PASSWORD }}
             docker push $PROJECT_NAME:ver_$GITHUB_RUN_NUMBER
-       
