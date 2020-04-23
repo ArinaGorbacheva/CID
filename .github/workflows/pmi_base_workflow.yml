@@ -36,7 +36,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Test
         run: sudo docker build -t $PROJECT_NAME:_Test -f Dockerfile_for_tests . --build-arg .
-      - run: IS_OK=1
 
   CI:
    runs-on: [ubuntu-latest]
