@@ -3,7 +3,7 @@
 name: CI
 
 env:
-  PROJECT_NAME: "arinagorbacheva/web_calculator"
+  PROJECT_NAME: "web_calculator"
   
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -49,13 +49,13 @@ jobs:
 
      - name: Docker build
        run: |
-            docker build -t $PROJECT_NAME:ver_$GITHUB_RUN_NUMBER .
+            docker build -t ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:ver_$GITHUB_RUN_NUMBER .
             docker images
             
      - name: Upload to docker hub 
        run: |
             docker login --username=${{ secrets.DOCKER_LOGIN }} --password=${{ secrets.DOCKER_PASSWORD }}
-            docker push $PROJECT_NAME:ver_$GITHUB_RUN_NUMBER
+            docker push ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:ver_$GITHUB_RUN_NUMBER
 
   CD:
     runs-on: [ubuntu-latest]
@@ -67,6 +67,6 @@ jobs:
         continue-on-error: true
      
       - name: run project
-        run: docker run -d --rm --name $PROJECT_NAME -p 5000:5000 $PROJECT_NAME:ver_$GITHUB_RUN_NUMBER
-        continue-on-error: true
+        run: docker run -d --rm --name $PROJECT_NAME -p 5000:5000  ${{ secrets.DOCKER_LOGIN }}/$$PROJECT_NAME:ver_$GITHUB_RUN_NUMBER
+
         
