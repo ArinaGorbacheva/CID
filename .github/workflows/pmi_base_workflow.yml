@@ -58,7 +58,7 @@ jobs:
             docker push $PROJECT_NAME:ver_$GITHUB_RUN_NUMBER
 
   CD:
-    runs-on: [test_env, macos]
+    runs-on: [test_env, macOS]
     needs: CI
     
     steps: 
