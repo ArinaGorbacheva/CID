@@ -70,3 +70,4 @@ jobs:
         run: docker run -d --rm --name $PROJECT_NAME -p 5000:5000 $PROJECT_NAME:ver_$GITHUB_RUN_NUMBER
         
         
+        
