@@ -58,7 +58,6 @@ jobs:
             docker push $PROJECT_NAME:ver_$GITHUB_RUN_NUMBER
 
   CD:
-    runs-on: arinagorbacheva
     needs: CI
     
     steps: 
