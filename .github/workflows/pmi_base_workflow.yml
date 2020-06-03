@@ -49,13 +49,13 @@ jobs:
 
      - name: Docker build
        run: |
-            docker build -t ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:ver_$GITHUB_RUN_NUMBER .
+            docker build -t ${{ secrets.USERNAME }}/$PROJECT_NAME:ver_$GITHUB_RUN_NUMBER .
             docker images
             
      - name: Upload to docker hub 
        run: |
             docker login --username=${{ secrets.DOCKER_LOGIN }} --password=${{ secrets.DOCKER_PASSWORD }}
-            docker push ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:ver_$GITHUB_RUN_NUMBER
+            docker push ${{ secrets.USERNAME }}/$PROJECT_NAME:ver_$GITHUB_RUN_NUMBER
 
   CD:
     runs-on: [ubuntu-latest]
@@ -67,6 +67,6 @@ jobs:
         continue-on-error: true
      
       - name: run project
-        run: docker run -d --rm --name $PROJECT_NAME -p 5000:5000  ${{ secrets.DOCKER_LOGIN }}/$$PROJECT_NAME:ver_$GITHUB_RUN_NUMBER
+        run: docker run -d --rm --name $PROJECT_NAME -p 5000:5000  ${{ secrets.USERNAME }}/$$PROJECT_NAME:ver_$GITHUB_RUN_NUMBER
 
         
