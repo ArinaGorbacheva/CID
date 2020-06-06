@@ -28,7 +28,7 @@ jobs:
        run: docker image rm --force ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:latest
        continue-on-error: true
      - name: rmi container
-       run: docker rmi project
+       run: docker rm project
        continue-on-error: true  
      - name: run
        run: docker run -d -p 5000:5000 -e FLASK_APP="js_example" --name project ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:latest
