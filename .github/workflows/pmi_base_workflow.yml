@@ -34,6 +34,7 @@ jobs:
      - uses: actions/checkout@v2
      - name: up container
        run: |
+         docker kill rm ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:latest
          docker image rm ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:latest
          docker run -d -p 5000:5000 -e FLASK_APP="js_example" ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:latest
   
