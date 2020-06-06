@@ -35,10 +35,12 @@ jobs:
       - name: Run testing
         run:  docker run -v `pwd`:/tmp $PROJECT_NAME:_Test
         continue-on-error: true
+      - name: ls
+        run: ls
       - uses: actions/upload-artifact@v2
         with:
           name: test
-          path: test.txt
+          path: $GITHUB_WORKSPACE/test.txt
 
   Push_to_docker:
    runs-on: [ubuntu-latest]
