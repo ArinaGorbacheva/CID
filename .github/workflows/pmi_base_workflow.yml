@@ -43,7 +43,7 @@ jobs:
           name: test
           path: /tmp/unit_tests.txt
 
-  Push to docker:
+  Push_to_docker:
    runs-on: [ubuntu-latest]
    needs: [Test, codeStyle] 
    steps:
