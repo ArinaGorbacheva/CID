@@ -16,18 +16,15 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   Deploy:
-    runs-on: [ubuntu-latest]
+    runs-on: [publish_server]
     steps:
      - uses: actions/checkout@v2
-
      - name: drop previous container
        run: |
-        mkdir ~/.ssh
-        touch  ~/.ssh/known_hosts
-        ssh-keygen -R ${{ secrets.REMOTE_HOST }}
-        echo ${{ secrets.REMOTE_PASS}} | ssh ${{ secrets.REMOTE_PS }}@${{ secrets.REMOTE_HOST }} 'docker kill ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:latest' 
+        docker kill ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:latest 
+        continue-on-error: true
      - name: up container
-       run: echo ${{ secrets.REMOTE_PASS}} | ssh ${{ secrets.REMOTE_PS }}@${{ secrets.REMOTE_HOST }} 'docker run -p 5000:5000 ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:latest' 
+       run: docker run -p 5000:5000 ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:latest'
   
   End-to-end:
     runs-on: [ubuntu-latest]
