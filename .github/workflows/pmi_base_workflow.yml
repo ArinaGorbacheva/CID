@@ -21,7 +21,9 @@ jobs:
      - uses: actions/checkout@v2
 
      - name: drop previous container
-       run: echo ${{ secrets.REMOTE_PASS}} | ssh ${{ secrets.REMOTE_PS }}@${{ secrets.REMOTE_HOST }} 'docker kill ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:latest' 
+       run: |
+        ssh-keygen -R ${{ secrets.REMOTE_HOST }} -f ~/.ssh/known_hosts
+        echo ${{ secrets.REMOTE_PASS}} | ssh ${{ secrets.REMOTE_PS }}@${{ secrets.REMOTE_HOST }} 'docker kill ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:latest' 
      - name: up container
        run: echo ${{ secrets.REMOTE_PASS}} | ssh ${{ secrets.REMOTE_PS }}@${{ secrets.REMOTE_HOST }} 'docker run -p 5000:5000 ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:latest' 
   
