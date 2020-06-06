@@ -37,7 +37,9 @@ jobs:
       - name: build test container
         run: sudo docker build -t $PROJECT_NAME:_Test -f Dockerfile_for_tests . --build-arg .
       - name: Run testing
-        run:  docker run -v /tmp:/tmp -it $PROJECT_NAME:_Test
+        run:  docker run -v /tmp:dir/docker $PROJECT_NAME:_Test
+      - name: ls
+        run: ls /tmp
       - uses: actions/upload-artifact@v2
         with:
           name: test
