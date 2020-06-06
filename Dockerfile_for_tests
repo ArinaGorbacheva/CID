@@ -2,8 +2,8 @@ FROM python:3-onbuild
 EXPOSE 5000
 ARG dir 
 
-COPY . dir/docker
-WORKDIR dir/docker 
+COPY . /tmp
+WORKDIR /tmp
 RUN python3 -m venv venv
 RUN . venv/bin/activate
 RUN pip install -e .
