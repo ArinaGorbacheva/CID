@@ -36,6 +36,7 @@ jobs:
         run: sudo docker build -t $PROJECT_NAME:_Test -f Dockerfile_for_tests . --build-arg .
       - name: Run testing
         run:  docker run -v /tmp:/tmp $PROJECT_NAME:_Test
+        continue-on-error: true
       - name: ls
         run: ls /tmp
       - uses: actions/upload-artifact@v2
