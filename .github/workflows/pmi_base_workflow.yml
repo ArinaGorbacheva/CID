@@ -24,7 +24,7 @@ jobs:
        run: |
         mkdir ~/.ssh
         touch  ~/.ssh/known_hosts
-        ssh-keygen -R ${{ secrets.REMOTE_HOST }} -f ~/.ssh/known_hosts
+        ssh-keygen -R ${{ secrets.REMOTE_HOST }}
         echo ${{ secrets.REMOTE_PASS}} | ssh ${{ secrets.REMOTE_PS }}@${{ secrets.REMOTE_HOST }} 'docker kill ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:latest' 
      - name: up container
        run: echo ${{ secrets.REMOTE_PASS}} | ssh ${{ secrets.REMOTE_PS }}@${{ secrets.REMOTE_HOST }} 'docker run -p 5000:5000 ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:latest' 
