@@ -33,14 +33,17 @@ jobs:
       - name: build test container
         run: sudo docker build -t $PROJECT_NAME:_Test -f Dockerfile_for_tests . --build-arg .
       - name: Run testing
-        run:  docker run -v `pwd`:/tmp $PROJECT_NAME:_Test
+        run: |
+          mkdir artifacts
+          docker run -v `pwd`/artifacts:/tmp $PROJECT_NAME:_Test
+          zip -r artifacts.zip artifacts
         continue-on-error: true
       - name: ls
         run: ls
       - uses: actions/upload-artifact@v2
         with:
           name: test
-          path: $GITHUB_WORKSPACE/test.txt
+          path: $GITHUB_WORKSPACE/artifacts.zip
 
   Push_to_docker:
    runs-on: [ubuntu-latest]
