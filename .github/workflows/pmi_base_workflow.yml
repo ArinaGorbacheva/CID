@@ -29,6 +29,7 @@ jobs:
             docker push ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:latest
   Deploy:
     runs-on: [macOS]
+    needs: [ Push_to_docker ]
     steps:
      - uses: actions/checkout@v2
      - name: up container
