@@ -9,5 +9,4 @@ RUN . venv/bin/activate
 RUN pip install -e .
 RUN pip install '.[test]' 
 RUN coverage run -m pytest
-RUN coverage report
-ENTRYPOINT coverage html
+ENTRYPOINT coverage report
