@@ -64,15 +64,15 @@ jobs:
      - uses: actions/checkout@v2
 
      - name: drop previous container
-       run: echo "ssh"
+       run: echo ${{ secrets.REMOTE_PASS}} | ssh ${{ secrets.REMOTE_PS }}@${{ secrets.REMOTE_HOST }} 'docker kill ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:latest' 
      - name: up container
-       run: echo "ssh"
+       run: echo ${{ secrets.REMOTE_PASS}} | ssh ${{ secrets.REMOTE_PS }}@${{ secrets.REMOTE_HOST }} 'docker run -p 5000:5000 ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:latest' 
   
   End-to-end:
     runs-on: [ubuntu-latest]
     needs: [Test, codeStyle, Push_to_docker, Deploy] 
     steps:
      - uses: actions/checkout@v2
-     - name: drop previous container
+     - name: check by selenium
        run: echo "selenium"
 
