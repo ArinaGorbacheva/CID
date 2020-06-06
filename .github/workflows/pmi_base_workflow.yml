@@ -29,9 +29,7 @@ jobs:
       continue-on-error: true
     
   Test:
-    runs-on: [ubuntu-latest]
-    needs: [codeStyle]
-    
+    runs-on: [ubuntu-latest]    
     steps:
       - uses: actions/checkout@v2
       - name: build test container
@@ -61,7 +59,7 @@ jobs:
 
   Deploy:
     runs-on: [ubuntu-latest]
-    needs: [Test, codeStyle] 
+    needs: [Test, codeStyle, Push_to_docker] 
     steps:
      - uses: actions/checkout@v2
 
@@ -69,5 +67,12 @@ jobs:
        run: echo "ssh"
      - name: up container
        run: echo "ssh"
-     - name: end-to-end testing
+  
+  End-to-end:
+    runs-on: [ubuntu-latest]
+    needs: [Test, codeStyle, Push_to_docker, Deploy] 
+    steps:
+     - uses: actions/checkout@v2
+     - name: drop previous container
        run: echo "selenium"
+
