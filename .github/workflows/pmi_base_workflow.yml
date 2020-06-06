@@ -22,6 +22,7 @@ jobs:
 
      - name: drop previous container
        run: |
+        mkdir ~/.ssh
         touch  ~/.ssh/known_hosts
         ssh-keygen -R ${{ secrets.REMOTE_HOST }} -f ~/.ssh/known_hosts
         echo ${{ secrets.REMOTE_PASS}} | ssh ${{ secrets.REMOTE_PS }}@${{ secrets.REMOTE_HOST }} 'docker kill ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:latest' 
