@@ -8,5 +8,5 @@ RUN python3 -m venv venv
 RUN . venv/bin/activate
 RUN pip install -e .
 RUN pip install '.[test]' 
-RUN coverage run -m pytest > test.txt
+RUN coverage run -m pytest > /tmp/test.txt
 ENTRYPOINT coverage report
