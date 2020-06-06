@@ -16,15 +16,11 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   Deploy:
-    runs-on: [publish_server]
+    runs-on: [macOS]
     steps:
      - uses: actions/checkout@v2
-     - name: drop previous container
-       run: |
-        docker kill ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:latest 
-        continue-on-error: true
      - name: up container
-       run: docker run -p 5000:5000 ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:latest'
+       run: docker run -p 5000:5000 ${{ secrets.DOCKER_LOGIN }}/$PROJECT_NAME:latest
   
   End-to-end:
     runs-on: [ubuntu-latest]
